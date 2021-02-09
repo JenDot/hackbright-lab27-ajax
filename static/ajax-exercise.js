@@ -4,26 +4,24 @@
 // PART 1: SHOW A FORTUNE
 
 function showFortune(evt) {
-
-    // TODO: get the fortune and show it in the #fortune-text div
+    $('#get-fortune-button').on('click', showFortune);
 }
-
-$('#get-fortune-button').on('click', showFortune);
-
-
-
+$.get('/fortune')
 
 
 // PART 2: SHOW WEATHER
-
+function replaceForecast(results) {
+    $("#weather-info").html(results.forecast);
+}
 function showWeather(evt) {
     evt.preventDefault();
 
     let url = "/weather.json";
-    let formData = {"zipcode": $("#zipcode-field").val()};
+    let formData = { "zipcode": $("#zipcode-field").val() };
 
 
     // TODO: request weather with that URL and show the forecast in #weather-info
+    $.get(url, formData, replaceForecast)
 }
 
 $("#weather-form").on('submit', showWeather);
@@ -41,5 +39,3 @@ function orderMelons(evt) {
 }
 
 $("#order-form").on('submit', orderMelons);
-
-
